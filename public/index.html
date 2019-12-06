@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="dependencias/bootstrap/dist/css/bootstrap.css">
+	<meta charset="UTF-8">
+	<title>Backbone</title>
+	<script src="dependencias/jquery/dist/jquery.js"></script>
+	<script src="dependencias/underscore/underscore.js"></script>
+	<script src="dependencias/backbone/backbone.js"></script>
+	<script src="js/scripts.js"></script>
+	<style type="text/css">
+		body{
+			background-color: #F8F8FF;
+		}
+		header{
+			height: 160px;
+			margin-top: 20px;
+			background-color: #F8F8FF;
+		}
+		span{
+			color: red;
+			font-weight: bold;
+		}
+		#instalacao{
+			font-size: 16px;
+			color: black;
+			font-weight: bold;
+		}
+		p{
+			font-weight: bold;
+			color: black;
+		}
+		h1{
+			color: white;
+			margin-top: 10px;
+			font-size: 48px;
+		}
+		footer{
+			height: 55px;
+			background-color: #F8F8FF;
+		}
+		footer p{
+			color: black;
+		}
+		h2{
+			color: black;
+		}
+		h3{
+			color: black;
+		}
+		h4{
+			color: black;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<header>
+			<div class="text-center"><img src="images/logo.png"></div>
+		</header>
+		<br>
+		<h3 class="text-center"><b>Introdução</b></h3>
+		<p class="text-center">Bakbone.js é uma biblioteca javascript que fornece estrutura para as suas aplicações, adapta-se o conceito de MVC (model, view, controller) padrão que foi implementado no início da linguagem server-side como PHP.<p>
+		<p class="text-center">Porém ele não é considerado um verdadeiro MVC, pois é considerado como MV * porque C no backbone é para o Collection em vez de Controller. Entretanto ainda lhe dá a funcionalidade similar.</p>
+		<p class="text-center">O Backbone faz uso intensivo da biblioteca Underscore.js, sua maior dependência. O framework também precisa da biblioteca jQuery, sua menor dependência, pois você pode utilizar outra biblioteca para a mesma função, como a Zepto por exemplo.</p>
+		<hr>
+		<h3><b>Quando eu preciso Backbone.js?</b></h3>
+		<p>Se você estiver desenvolvendo uma aplicação web que exige muito javascript, você terá backbone. Se seu aplicativo precisa ser escalável, então você vai precisar de backbone para dar estrutura ao seu código. Se você está construindo uma aplicação web que muito com linhas de jQuery para atravessar o DOM, dar animações, ou muitos eventos de ligação para o seu aplicativo, você vai com certeza querer usar o Backbone.</p>
+		<p>Se você estiver criando um tema para wordpress, provavelmente irá precisar de um pouco de jQuery, você não precisa usar backbone.</p>
+		<p>A conclusão é que, se você quiser trazer o seu front-end para o próximo nível, um nível mais elevado, você vai precisar usar backbone.</p>
+		<hr>
+		<h3><b>Instalação</b></h3>
+		<p>Para instalar o Backbone.js é preciso importar todas as dependências necessárias atraves da tag html <span>script</span> dentro do arquivo html. Por exemplo:</p>
+		<img src="images/dependencias.png">
+		<hr>
+		<p>A imagem acima mostra a importação das dependências necessárias, que são: Jquery, Underscore e o próprio Backbone.</p>
+		<hr>
+		<h4><b>Dependências para conexão com o banco</b></h4>
+		<ul>
+			<li>
+				<p>Primeiro você precisa executar o seguinte comando via cmd dentro do diretório do projeto:</p>
+				<img src="images/instalacao1.png">
+				<p>Este comando irá adicionar o arquivo package.json ao projeto.</p>
+			</li>
+			<li>
+				<p>Após isso você deverá executar o seguinte comando:</p>
+				<img src="images/instalacao2.png">
+				<p>Este comando irá instalar o framework Express, que é necessário.</p>
+			</li>
+			<li>
+				<p>Depois você precisa executar o seguinte comando:</p>
+				<img src="images/instalacao3.png">
+				<p>Este comando irá instalar o Mongoose, que é uma biblioteca do Nodejs que proporciona uma solução baseada em esquemas para modelar os dados da sua aplicação.</p>
+			</li>
+			<li>
+				<p>Por último você precisa iniciar o servidor, isto é feito com o seguinte comando:</p>
+				<img src="images/instalacao4.png">
+			</li>
+		</ul>
+		<p><span id="instalacao">Para que todos os passos executados acima funcionem você deve ter obrigatoriamente o framework Node.js instalado em seu computador.</span></p>
+		<hr>
+		<h3><b>Sistema de rotas</b></h3>
+		<p>Existem dois tipo de parâmetros possíveis na definição de uma rota dinâmica:</p>
+		<ul>
+			<li>
+				<p>:parametro - essa notação definirá que existirá somente este parametro definido. Como exemplo considere "posts/:id". Isso significa que a URL mapeará somente o primeiro parâmetro após a "/", definindo-o como o id. Uma URL com /post/1/2 implesmente desconsiderará o parâmetro 2. Caso precise de mais parâmetros basta defnir a rota como posts/:id/:outroid.</p>
+			</li>
+			<li>
+				<p>*parametro - Em comparação com o parâmetro anterior, este irá mapear diversos parâmetros de uma URL, deconsiderando seu prefixo. Isso significa que uma definição posts/*ids considerará todos os valores que aparecem depois de posts/. Por exemplo, posts/1/2 irá ler os valores 1 e 2</p>
+			</li>
+		</ul>
+		<img src="images/rotas1.png">
+		<p>Outra maneira de se definir a classe Backbone.Router é através de seu construtor. Assim como o metodo route() existe o initialize() que obtem um hash como parâmetro. Ele receberá dois argumentos obrigatórios e um opcional, sendo o primeiro argumento a rota que será definida igual anteriormente, o segundo argumento será o nome da ação representada pela rota e será utilizada como identificador do evento rota, o terceiro argumento é opcional sendo uma função a ser executada quando a rota for acessada.</p>
+		<img src="images/rotas2.png">
+		<p>Caso o usuário queira voltar a página, para ainda usar uma URL amigável pode-se adicionar uma função para lançar o evento "route:dispatch" que captura o histórico do navegador e utiliza na URL.</p>
+		<img src="images/rotas3.png">
+		<hr>
+		<h3><b>Conclusão</b></h3>
+		<p>O Backbone é bem flexível simples e direto. Ao trabalhar como ele você não terá que mudar sua forma de pensar JavaScript.</p>
+		<h4><b>Pontos positivos</b></h4>
+		<ul>
+			<li>
+				<p>Leve pesando apenas 6.5kb.</p>
+			</li>
+			<li>
+				<p>Flexível: não vai reclamar se você precisar utilizar outras bibliotecas.</p>
+			</li>
+			<li>
+				<p>Ótima documentação</p>
+			</li>
+			<li>
+				<p>Comunidade enorme.</p>
+			</li>
+		</ul>
+		<h4><b>Pontos negativos</b></h4>
+		<ul>
+			<li>
+				<p>Templates: utilize o handlebars ou outro no lugar do undescore</p>
+			</li>
+		</ul>
+		<hr>
+		<button onclick="location.href='http://localhost:3000/registro.html'" type="button" class="btn btn-success btn-lg btn-block center">CRUD</button>
+		<footer><hr><p class="text-center">© 2019-2019</p></footer>
+	</div>
+	<script type="text/javascript">
+		var AppRouter = Backbone.Router.extend({
+		    routes: {
+		        'teste':  'callbackToTeste',
+		        'bar':   'callbackToBar',
+		        'proof': 'callbackToProof'
+		    },
+		    callbackToTeste: function () {
+		        console.log('Teste sobre rotas!');
+		    },
+		    callbackToBar: function () {
+		        console.log('callback to bar');
+		    },
+		    callbackToProof: function () {
+		        console.log('callback to proof');
+		    }
+		});
+		var app_router = new AppRouter();
+		Backbone.history.start();
+	</script>
+</body>
+</html>
